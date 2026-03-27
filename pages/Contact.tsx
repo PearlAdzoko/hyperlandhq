@@ -1,27 +1,35 @@
 
 import React, { useState } from 'react';
 import { Button } from '../components/Button';
-import { Mail, MessageSquare, Send, ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    website: '',
+    name: '',
     email: '',
-    project: '',
+    industry: '',
+    companySize: '',
+    budget: '',
+    service: '',
+    details: '',
+    referral: '',
   });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const subject = encodeURIComponent(`Project Inquiry: ${formData.firstName} ${formData.lastName}`);
+
+    // Create mailto link
+    const subject = encodeURIComponent(`Business Inquiry from ${formData.name}`);
     const body = encodeURIComponent(
-      `Name: ${formData.firstName} ${formData.lastName}\n` +
+      `Name: ${formData.name}\n` +
       `Email: ${formData.email}\n` +
-      `Website: ${formData.website || 'N/A'}\n\n` +
-      `Project Description:\n${formData.project}\n`
+      `Industry: ${formData.industry}\n` +
+      `Company Size: ${formData.companySize}\n` +
+      `Budget: ${formData.budget}\n` +
+      `Service: ${formData.service}\n` +
+      `How they heard: ${formData.referral}\n\n` +
+      `Project Details:\n${formData.details}`
     );
 
     window.location.href = `mailto:hello@hyperlandhq.com?subject=${subject}&body=${body}`;
@@ -29,129 +37,179 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="py-24 md:py-40 bg-brand-light dark:bg-[#0a0a0a]">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24">
-        <div className="reveal animate-fade-in-up">
-          <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-6 tracking-tight">Contact</h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 font-light leading-relaxed mb-12">
-            Interested in what we're building? Have a question about a project? Reach out and let's start a conversation.
-          </p>
+    <div className="bg-white pt-32 pb-24 px-6 md:px-12">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
 
-          <div className="space-y-8">
-            <div className="flex items-start space-x-4 group cursor-pointer">
-              <div className="w-10 h-10 rounded-lg bg-white/50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-primary shrink-0 group-hover:scale-110 group-hover:border-primary transition-all">
-                <Mail size={20} />
-              </div>
-              <div>
-                <p className="text-sm text-neutral-500 uppercase tracking-widest font-bold mb-1 group-hover:text-primary transition-colors">Email</p>
-                <a href="mailto:hello@hyperlandhq.com" className="text-neutral-900 dark:text-white text-lg hover:text-primary transition-colors">
-                  hello@hyperlandhq.com
-                </a>
+          {/* Left Column: Info & Founder Card */}
+          <div className="lg:col-span-5 reveal">
+            <h1 className="text-6xl md:text-8xl font-bold text-neutral-900 mb-8 tracking-tight">
+              Contact
+            </h1>
+            <p className="text-xl text-neutral-600 leading-relaxed mb-16 max-w-lg">
+              Let’s turn your ideas into something powerful—fill out the form to begin.
+            </p>
+
+            {/* Founder Card */}
+            <div className="bg-neutral-50 rounded-lg p-8 mb-16 max-w-sm reveal stagger-1">
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="w-12 h-12 rounded-full overflow-hidden bg-neutral-200">
+                  <img
+                    src="/images/pearl-pic.jpg"
+                    className="w-full h-full object-cover"
+                    alt="Pearl"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-[10px] font-bold text-neutral-900 uppercase tracking-widest">Want to have a chat with the founder?</h3>
+                  <p className="text-[10px] text-neutral-400 uppercase tracking-[0.2em] mt-1">PEARL / CO-FOUNDER</p>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-start space-x-4 group cursor-pointer">
-              <div className="w-10 h-10 rounded-lg bg-white/50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-primary shrink-0 group-hover:scale-110 group-hover:border-primary transition-all">
-                <MessageSquare size={20} />
+            {/* Contact Details Footer */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-[10px] font-bold uppercase tracking-[0.3em] reveal stagger-2">
+              <div>
+                <p className="text-neutral-400 mb-4">Email</p>
+                <a href="mailto:hello@hyperlandhq.com" className="text-neutral-900 break-all">hello@hyperlandhq.com</a>
               </div>
               <div>
-                <p className="text-sm text-neutral-500 uppercase tracking-widest font-bold mb-1 group-hover:text-primary transition-colors">Social</p>
-                <div className="flex space-x-4 text-neutral-900 dark:text-white">
-                  <a href="#" className="hover:text-primary transition-colors underline-offset-4 hover:underline">Twitter</a>
-                  <a href="#" className="hover:text-primary transition-colors underline-offset-4 hover:underline">LinkedIn</a>
-                </div>
+                <p className="text-neutral-400 mb-4">Location</p>
+                <p className="text-neutral-900">Remote / Global</p>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="bg-white dark:bg-neutral-900/30 border border-neutral-200 dark:border-neutral-800 rounded-[2rem] p-8 md:p-12 relative shadow-xl reveal animate-fade-in-up stagger-1">
-          <div className="absolute inset-0 bg-primary/5 blur-[80px] rounded-full pointer-events-none -z-10"></div>
-          
-          {submitted ? (
-            <div className="h-full flex flex-col items-center justify-center text-center py-12 animate-fade-in-up">
-              <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6 animate-bounce">
-                <Send size={24} />
-              </div>
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">Message sent</h3>
-              <p className="text-neutral-600 dark:text-neutral-400 mb-8">Thanks for reaching out. We'll be in touch soon.</p>
-              <Button variant="outline" onClick={() => setSubmitted(false)}>Send another message</Button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="firstName" className="block text-base font-medium text-neutral-900 dark:text-white mb-3">First name*</label>
+          {/* Right Column: Interaction Form */}
+          <div className="lg:col-span-7 reveal stagger-1">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="relative group">
                   <input
                     type="text"
-                    id="firstName"
+                    placeholder="Your name *"
                     required
-                    value={formData.firstName}
-                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    className="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-100 dark:border-neutral-800 rounded-xl px-5 py-4 text-neutral-900 dark:text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-neutral-400 dark:placeholder:text-neutral-600 shadow-sm"
-                    placeholder="Pearl"
+                    className="w-full bg-neutral-50 border-b border-neutral-200 py-4 px-4 focus:outline-none focus:border-neutral-900 transition-all text-neutral-900 placeholder:text-neutral-400 placeholder:font-medium placeholder:text-xs"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
-                <div>
-                  <label htmlFor="lastName" className="block text-base font-medium text-neutral-900 dark:text-white mb-3">Last name*</label>
+                <div className="relative group">
                   <input
-                    type="text"
-                    id="lastName"
+                    type="email"
+                    placeholder="Business email *"
                     required
-                    value={formData.lastName}
-                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    className="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-100 dark:border-neutral-800 rounded-xl px-5 py-4 text-neutral-900 dark:text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-neutral-400 dark:placeholder:text-neutral-600 shadow-sm"
-                    placeholder="Smart"
+                    className="w-full bg-neutral-50 border-b border-neutral-200 py-4 px-4 focus:outline-none focus:border-neutral-900 transition-all text-neutral-900 placeholder:text-neutral-400 placeholder:font-medium placeholder:text-xs"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   />
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="website" className="block text-base font-medium text-neutral-900 dark:text-white mb-3">Current website (if applicable)</label>
-                <input
-                  type="text"
-                  id="website"
-                  value={formData.website}
-                  onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                  className="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-100 dark:border-neutral-800 rounded-xl px-5 py-4 text-neutral-900 dark:text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-neutral-400 dark:placeholder:text-neutral-600 shadow-sm"
-                  placeholder="hyperlandhq.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-base font-medium text-neutral-900 dark:text-white mb-3">Email*</label>
-                <input
-                  type="email"
-                  id="email"
+              {/* Dropdowns */}
+              <div className="relative group">
+                <select
                   required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-100 dark:border-neutral-800 rounded-xl px-5 py-4 text-neutral-900 dark:text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-neutral-400 dark:placeholder:text-neutral-600 shadow-sm"
-                  placeholder="pearl@hyperlandhq.com"
-                />
+                  className="w-full bg-neutral-50 border-b border-neutral-200 py-4 px-4 focus:outline-none focus:border-neutral-900 transition-all text-neutral-900 appearance-none text-xs font-medium cursor-pointer"
+                  value={formData.industry}
+                  onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
+                >
+                  <option value="" disabled>Business industry?*</option>
+                  <option value="Tech">Tech</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="Finance">Finance</option>
+                  <option value="E-commerce">E-commerce</option>
+                  <option value="Other">Other</option>
+                </select>
+                <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" size={14} />
               </div>
 
-              <div>
-                <label htmlFor="project" className="block text-base font-medium text-neutral-900 dark:text-white mb-3">Tell me a bit about the project*</label>
+              <div className="relative group">
+                <select
+                  required
+                  className="w-full bg-neutral-50 border-b border-neutral-200 py-4 px-4 focus:outline-none focus:border-neutral-900 transition-all text-neutral-900 appearance-none text-xs font-medium cursor-pointer"
+                  value={formData.companySize}
+                  onChange={(e) => setFormData({ ...formData, companySize: e.target.value })}
+                >
+                  <option value="" disabled>Company size*</option>
+                  <option value="1-10">1-10</option>
+                  <option value="11-50">11-50</option>
+                  <option value="51-200">51-200</option>
+                  <option value="200+">200+</option>
+                </select>
+                <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" size={14} />
+              </div>
+
+              <div className="relative group">
+                <select
+                  required
+                  className="w-full bg-neutral-50 border-b border-neutral-200 py-4 px-4 focus:outline-none focus:border-neutral-900 transition-all text-neutral-900 appearance-none text-xs font-medium cursor-pointer"
+                  value={formData.budget}
+                  onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                >
+                  <option value="" disabled>What's your total budget for this project?*</option>
+                  <option value="< $10k">&lt; $1k</option>
+                  <option value="$10k-$25k">$1k-$5k</option>
+                  <option value="$25k-$50k">$5k-$10k</option>
+                  <option value="$50k+">$10k+</option>
+                </select>
+                <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" size={14} />
+              </div>
+
+              <div className="relative group">
+                <select
+                  required
+                  className="w-full bg-neutral-50 border-b border-neutral-200 py-4 px-4 focus:outline-none focus:border-neutral-900 transition-all text-neutral-900 appearance-none text-xs font-medium cursor-pointer"
+                  value={formData.service}
+                  onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                >
+                  <option value="" disabled>What service are you interested in?*</option>
+                  <option value="Full Product">Full Product</option>
+                  <option value="MVP Build">MVP Build</option>
+                  <option value="Brand Design/UI/UX">Brand Design/UI/UX</option>
+                  <option value="Strategy">Strategy</option>
+                </select>
+                <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" size={14} />
+              </div>
+
+              <div className="relative group">
                 <textarea
-                  id="project"
-                  required
-                  rows={4}
-                  value={formData.project}
-                  onChange={(e) => setFormData({ ...formData, project: e.target.value })}
-                  className="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-100 dark:border-neutral-800 rounded-xl px-5 py-4 text-neutral-900 dark:text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all resize-none placeholder:text-neutral-400 dark:placeholder:text-neutral-600 shadow-sm"
-                  placeholder="I need new website for my business..."
-                ></textarea>
+                  placeholder="Tell us more details about your project"
+                  className="w-full bg-neutral-50 border-b border-neutral-200 py-4 px-4 focus:outline-none focus:border-neutral-900 transition-all text-neutral-900 placeholder:text-neutral-400 placeholder:font-medium placeholder:text-xs min-h-[120px] resize-none"
+                  value={formData.details}
+                  onChange={(e) => setFormData({ ...formData, details: e.target.value })}
+                />
               </div>
 
-              <Button 
-                type="submit" 
-                className="w-full bg-primary text-white font-bold py-5 rounded-full hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center space-x-2 border-none shadow-[0_0_30px_rgba(20,139,59,0.3)]"
-              >
-                <span>Contact us</span> <ArrowRight size={18} />
-              </Button>
+              <div className="relative group">
+                <select
+                  required
+                  className="w-full bg-neutral-50 border-b border-neutral-200 py-4 px-4 focus:outline-none focus:border-neutral-900 transition-all text-neutral-900 appearance-none text-xs font-medium cursor-pointer"
+                  value={formData.referral}
+                  onChange={(e) => setFormData({ ...formData, referral: e.target.value })}
+                >
+                  <option value="" disabled>How did you hear about us?*</option>
+                  <option value="Twitter">Twitter</option>
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="Referral">Referral</option>
+                  <option value="Other">Other</option>
+                </select>
+                <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" size={14} />
+              </div>
+
+              <div className="pt-8">
+                <Button
+                  type="submit"
+                  className="w-full bg-neutral-900 text-white font-bold py-5 rounded-lg hover:bg-neutral-800 transition-all text-[10px] uppercase tracking-[0.2em]"
+                >
+                  Contact us
+                </Button>
+                <p className="mt-4 text-[9px] text-neutral-400 leading-relaxed max-w-sm">
+                  By clicking Contact us, you agree to the HyperlandHQ Privacy Policy and consent to the processing of your personal data.
+                </p>
+              </div>
             </form>
-          )}
+          </div>
         </div>
       </div>
     </div>

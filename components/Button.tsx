@@ -24,12 +24,12 @@ export const Button: React.FC<ButtonProps> = ({
   const variants = {
     primary: "bg-primary hover:bg-primary-hover text-white",
     secondary:
-      "bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-900 dark:text-neutral-100",
+      "bg-neutral-100 hover:bg-neutral-200 text-neutral-900",
     outline:
-      "border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-600 text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white shadow-sm dark:shadow-none",
+      "border border-neutral-200 hover:border-neutral-300 text-neutral-600 hover:text-neutral-900 shadow-sm",
   };
 
-  const combinedClasses = `${baseStyles} ${variants[variant]} ${className}`;
+  const combinedClasses = `${baseStyles} ${className.includes(variants[variant]) ? '' : variants[variant]} ${className}`;
 
   if (to) {
     const isExternal = to.startsWith("http") || to.startsWith("mailto:");
