@@ -150,7 +150,7 @@ const About: React.FC = () => {
                 />
               </div>
               <p className="text-neutral-500 text-sm leading-relaxed mb-auto">
-                Kwesi plays a hands-on role in every client partnership working directly with founders, CTOs, and CXOs to shape strategy and drive results. Clients see him as a true partner and someone who understands their business, anticipates challenges, and delivers impact where it counts. For many teams, he becomes the person they rely on to map workflows, shape features, and guide product direction.
+                Kwesi plays a hands-on role in every client partnership, working directly with founders, CTOs, and CXOs to shape strategy and drive results. Not only is he an amicable engineering savant; clients see him as a true partner and someone who understands their business, anticipates challenges from a technical standpoint, and delivers impact where it counts.
               </p>
               <div className="mt-12 pt-8 border-t border-neutral-100 flex justify-between items-center text-[10px] font-bold text-neutral-900 uppercase tracking-[0.2em]">
                 <span>KWESI</span>
